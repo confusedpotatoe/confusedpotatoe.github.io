@@ -12,48 +12,22 @@ body {
     color: #d1fae5;
     line-height: 1.6;
     overflow-x: hidden;
+    position: relative;
 }
 
-/* TOPOGRAPHIC MOUNTAIN BACKGROUND */
-.topo-background {
+/* CANVAS */
+#topoCanvas {
     position: fixed;
-    width: 200%;
-    height: 200%;
-    top: -50%;
-    left: -50%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     z-index: -1;
-    background-color: #0e1511; /* dark moss background */
-
-    /* multiple "mountain contour layers" */
-    background-image:
-        linear-gradient(rgba(34,197,94,0.12) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(34,197,94,0.12) 1px, transparent 1px),
-        radial-gradient(circle at 30% 40%, rgba(34,197,94,0.08) 2px, transparent 4px),
-        radial-gradient(circle at 70% 60%, rgba(34,197,94,0.08) 2px, transparent 5px);
-    background-size: 50px 50px, 50px 50px, 150px 150px, 180px 180px;
-
-    animation: terrainMove 150s linear infinite;
 }
 
-@keyframes terrainMove {
-    0% {
-        transform: translate(0, 0) scale(1);
-    }
-    50% {
-        transform: translate(-60px, -40px) scale(1.01);
-    }
-    100% {
-        transform: translate(0, 0) scale(1);
-    }
-}
-
-/* ========================= */
 /* HERO */
-/* ========================= */
-
 .hero {
     height: 100vh;
-    background: radial-gradient(circle at top, #1b2b22, #0e1511);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -92,10 +66,7 @@ body {
     box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
 }
 
-/* ========================= */
 /* SECTIONS */
-/* ========================= */
-
 .section {
     padding: 80px 20px;
     max-width: 1000px;
