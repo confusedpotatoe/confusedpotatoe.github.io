@@ -70,7 +70,7 @@
 </footer>
 
 <script>
-    const canvas = document.getElementById('topoCanvas');
+   const canvas = document.getElementById('topoCanvas');
 const ctx = canvas.getContext('2d');
 
 function resize() {
@@ -80,30 +80,33 @@ function resize() {
 resize();
 window.addEventListener('resize', resize);
 
+// Create moving contour lines
 const lines = [];
-for(let i=0;i<15;i++){
+const lineCount = 25;
+for(let i=0; i<lineCount; i++){
     lines.push({
-        y: 50 + i*40,
-        amplitude: 30,
-        speed: 0.5 + Math.random()*0.3,
-        phase: Math.random()*100
+        y: i*30 + 50,
+        offset: Math.random()*50,
+        speed: 0.3 + Math.random()*0.2
     });
 }
 
 function animate() {
+    // Moss-green background
     ctx.fillStyle = "#0e1511";
     ctx.fillRect(0,0,canvas.width,canvas.height);
 
-    ctx.strokeStyle = "#a4f9a4"; 
-    ctx.lineWidth = 3;
+    // Draw moving lines
+    ctx.strokeStyle = "#a4f9a4";
+    ctx.lineWidth = 2.5;
+    ctx.shadowColor = "#a4f9a4";
+    ctx.shadowBlur = 3;
 
     lines.forEach(line => {
         ctx.beginPath();
-        for(let x=0;x<=canvas.width;x+=10){
-            let y = line.y + Math.sin((x/50) + (Date.now()/1000)*line.speed + line.phase)*line.amplitude;
-            if(x===0) ctx.moveTo(x,y);
-            else ctx.lineTo(x,y);
-        }
+        let y = line.y + Math.sin(Date.now()/1000 + line.offset)*20;
+        ctx.moveTo(0, y);
+        ctx.lineTo(canvas.width, y);
         ctx.stroke();
     });
 
