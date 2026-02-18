@@ -2,56 +2,63 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Milo | Full-Stack Developer</title>
+    <title>Milo | AI & Cloud Engineer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header>
+<header class="hero">
     <h1>Milo</h1>
-    <p>Full-Stack Development Student | AI & Cloud</p>
+    <p class="tagline">Full-Stack Developer • AI • Cloud Architecture</p>
+    <a href="#projects" class="btn">View Projects</a>
 </header>
 
-<section id="about">
+<section class="section">
     <h2>About Me</h2>
     <p>
-        I am a full-stack development student passionate about building scalable 
-        web applications and exploring AI-driven solutions. 
-        I enjoy working with backend systems, APIs, cloud infrastructure, 
-        and modern frontend technologies.
+        Full-stack development student focused on building scalable systems,
+        RESTful APIs, and cloud-native applications. Passionate about AI-driven
+        solutions and modern infrastructure design.
     </p>
 </section>
 
-<section id="skills">
-    <h2>Technical Skills</h2>
-    <ul>
-        <li>C# / .NET</li>
-        <li>ASP.NET Web API</li>
-        <li>JavaScript / HTML / CSS</li>
-        <li>SQL & Database Design</li>
-        <li>Cloud Fundamentals (Azure / AWS)</li>
-        <li>AI & Machine Learning Basics</li>
-        <li>Git & GitHub</li>
-    </ul>
+<section class="section">
+    <h2>Core Technologies</h2>
+    <div class="grid">
+        <div class="card">C# / .NET</div>
+        <div class="card">ASP.NET Web API</div>
+        <div class="card">Cloud (Azure / AWS)</div>
+        <div class="card">SQL & Data Modeling</div>
+        <div class="card">AI & Machine Learning</div>
+        <div class="card">Git & CI/CD</div>
+    </div>
 </section>
 
-<section id="projects">
+<section class="section" id="projects">
     <h2>Projects</h2>
 
-    <div class="project">
-        <h3>Web API Project</h3>
-        <p>RESTful API built with ASP.NET Core following clean architecture principles.</p>
+    <div class="project-card">
+        <h3>Scalable Web API</h3>
+        <p>Built RESTful API using ASP.NET Core with clean architecture and dependency injection.</p>
     </div>
 
-    <div class="project">
-        <h3>Database Design Project</h3>
-        <p>Designed relational database with ER diagrams, foreign keys, and optimized queries.</p>
+    <div class="project-card">
+        <h3>Cloud-Ready Backend</h3>
+        <p>Designed application prepared for Azure deployment with environment-based configuration.</p>
     </div>
 
+    <div class="project-card">
+        <h3>AI Integration Project</h3>
+        <p>Integrated AI services into backend system for intelligent text processing.</p>
+    </div>
 </section>
 
-<section id="contact">
+<section class="section">
     <h2>Contact</h2>
     <p>Email: yourmail@email.com</p>
     <p>GitHub: github.com/yourusername</p>
@@ -59,7 +66,7 @@
 </section>
 
 <footer>
-    <p>© 2026 Milo</p>
+    <p>© 2026 Milo • Built with HTML & CSS • Hosted on GitHub Pages</p>
 </footer>
 
 </body>
