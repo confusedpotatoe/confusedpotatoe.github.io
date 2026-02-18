@@ -70,48 +70,87 @@
 </footer>
 
 <script>
-   const canvas = document.getElementById('topoCanvas');
+  const canvas = document.getElementById('topoCanvas');
 const ctx = canvas.getContext('2d');
 
-function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+function resizeCanvas() {
+    // Handle high-DPI screens
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = window.innerWidth * dpr;
+    canvas.height = window.innerHeight * dpr;
+    canvas.style.width = window.innerWidth + "px";
+    canvas.style.height = window.innerHeight + "px";
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.scale(dpr, dpr);
 }
-resize();
-window.addEventListener('resize', resize);
 
-// Create moving contour lines
-const lines = [];
-const lineCount = 25;
-for(let i=0; i<lineCount; i++){
-    lines.push({
-        y: i*30 + 50,
-        offset: Math.random()*50,
-        speed: 0.3 + Math.random()*0.2
-    });
+resizeCanvas();
+
+// Mountain layers
+const layers = [];
+const layerCount = 6;
+
+for (let i = 0; i < layerCount; i++) {
+    const points = [];
+    const step = 50;
+    for (let x = 0; x <= window.innerWidth + step; x += step) {
+        points.push({
+            x: x,
+            y: window.innerHeight/2 + Math.random() * 120 - 60 - i*25
+        });
+    }
+    layers.push({ points, speed: 0.3 + i*0.1, opacity: 0.5 - i*0.05 });
+}
+
+function drawLayer(layer) {
+    ctx.beginPath();
+    ctx.moveTo(0, window.innerHeight);
+    for (let i = 0; i < layer.points.length; i++) {
+        const p = layer.points[i];
+        ctx.lineTo(p.x, p.y);
+    }
+    ctx.lineTo(window.innerWidth, window.innerHeight);
+    ctx.closePath();
+    ctx.strokeStyle = `rgba(34,197,94,${layer.opacity})`;
+    ctx.lineWidth = 2.5; // make lines thicker
+    ctx.shadowColor = `rgba(34,197,94,0.3)`; // subtle glow
+    ctx.shadowBlur = 2;
+    ctx.stroke();
 }
 
 function animate() {
-    // Moss-green background
-    ctx.fillStyle = "#0e1511";
-    ctx.fillRect(0,0,canvas.width,canvas.height);
-
-    // Draw moving lines
-    ctx.strokeStyle = "#a4f9a4";
-    ctx.lineWidth = 2.5;
-    ctx.shadowColor = "#a4f9a4";
-    ctx.shadowBlur = 3;
-
-    lines.forEach(line => {
-        ctx.beginPath();
-        let y = line.y + Math.sin(Date.now()/1000 + line.offset)*20;
-        ctx.moveTo(0, y);
-        ctx.lineTo(canvas.width, y);
-        ctx.stroke();
+    ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
+    layers.forEach(layer => {
+        // Move points left
+        layer.points.forEach(p => p.x -= layer.speed);
+        // Loop points
+        if(layer.points[0].x < -50) {
+            const first = layer.points.shift();
+            first.x = layer.points[layer.points.length-1].x + 50;
+            layer.points.push(first);
+        }
+        drawLayer(layer);
     });
-
     requestAnimationFrame(animate);
 }
+
+animate();
+
+window.addEventListener('resize', () => {
+    resizeCanvas();
+    layers.forEach(layer => {
+        // recalc points for new width/height
+        layer.points = [];
+        const step = 50;
+        for (let x = 0; x <= window.innerWidth + step; x += step) {
+            layer.points.push({
+                x: x,
+                y: window.innerHeight/2 + Math.random() * 120 - 60
+            });
+        }
+    });
+});
+
 
 animate();
 
