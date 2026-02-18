@@ -6,15 +6,15 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    background: #0b0f19;
-    color: #e2e8f0;
+    background: #0e1511; /* deep forest */
+    color: #d1fae5;
     line-height: 1.6;
 }
 
 /* HERO SECTION */
 .hero {
     height: 100vh;
-    background: radial-gradient(circle at top, #145413, #092e09);
+    background: radial-gradient(circle at top, #1b2b22, #0e1511);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -26,7 +26,7 @@ body {
 .hero h1 {
     font-size: 64px;
     font-weight: 600;
-    background: linear-gradient(90deg, #38bdf8, #8b5cf6);
+    background: linear-gradient(90deg, #4ade80, #22c55e);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -34,21 +34,23 @@ body {
 .tagline {
     margin-top: 20px;
     font-size: 20px;
-    color: #94a3b8;
+    color: #9ca3af;
 }
 
 .btn {
     margin-top: 40px;
     padding: 12px 30px;
-    background: linear-gradient(90deg, #38bdf8, #8b5cf6);
-    color: white;
+    background: linear-gradient(90deg, #4ade80, #16a34a);
+    color: #0e1511;
     text-decoration: none;
     border-radius: 30px;
+    font-weight: 600;
     transition: 0.3s;
 }
 
 .btn:hover {
     transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
 }
 
 /* SECTION */
@@ -61,7 +63,7 @@ body {
 .section h2 {
     margin-bottom: 40px;
     font-size: 32px;
-    border-left: 4px solid #38bdf8;
+    border-left: 4px solid #22c55e;
     padding-left: 15px;
 }
 
@@ -73,35 +75,37 @@ body {
 }
 
 .card {
-    background: #111827;
+    background: #16231c;
     padding: 20px;
     border-radius: 10px;
     text-align: center;
     transition: 0.3s;
+    border: 1px solid #1f3a2f;
 }
 
 .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
 }
 
 /* PROJECTS */
 .project-card {
-    background: #111827;
+    background: #16231c;
     padding: 25px;
     margin-bottom: 25px;
     border-radius: 12px;
+    border: 1px solid #1f3a2f;
     transition: 0.3s;
 }
 
 .project-card:hover {
-    box-shadow: 0 0 25px rgba(139, 92, 246, 0.4);
+    box-shadow: 0 0 25px rgba(74, 222, 128, 0.3);
     transform: translateY(-5px);
 }
 
 footer {
     text-align: center;
     padding: 30px;
-    background: #020617;
-    color: #64748b;
+    background: #0b120e;
+    color: #6b7280;
 }
