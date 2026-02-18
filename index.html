@@ -1,87 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Milo | AI & Cloud Engineer</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-  html, body { margin:0; padding:0; overflow:hidden; height:100%; font-family:Inter, sans-serif; }
-  canvas { display:block; position:fixed; top:0; left:0; z-index:-1; }
-  h1, h2, p, .btn { position:relative; z-index:1; color:#d1fae5; text-align:center; }
-  .hero { height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; }
-  .btn { margin-top:20px; padding:10px 25px; background:#4ade80; color:#0e1511; border-radius:25px; text-decoration:none; font-weight:600; }
-  section { padding:50px 20px; max-width:1000px; margin:auto; position:relative; z-index:1; }
-  .project-card { background:#16231c; margin:20px auto; padding:25px; border-radius:12px; border:1px solid #1f3a2f; max-width:600px; transition:0.3s; }
-  .project-card:hover { box-shadow:0 0 45px rgba(164,249,164,0.6); transform:translateY(-5px); }
-</style>
+    <meta charset="UTF-8">
+    <title>Milo | AI & Cloud Engineer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<canvas id="topoCanvas"></canvas>
-
 <header class="hero">
     <h1>Milo</h1>
-    <p>Full-Stack Developer • AI • Cloud Architecture</p>
+    <p class="tagline">Full-Stack Developer • AI • Cloud Architecture</p>
     <a href="#projects" class="btn">View Projects</a>
 </header>
 
-<section>
-    <h2>Projects</h2>
-    <div class="project-card"><h3>Scalable Web API</h3><p>RESTful API with clean architecture.</p></div>
-    <div class="project-card"><h3>Cloud Backend</h3><p>Azure-ready backend deployment.</p></div>
-    <div class="project-card"><h3>AI Integration</h3><p>Integrated AI services into backend.</p></div>
+<section class="section">
+    <h2>About Me</h2>
+    <p>
+        Full-stack development student focused on building scalable systems,
+        RESTful APIs, and cloud-native applications. Passionate about AI-driven
+        solutions and modern infrastructure design.
+    </p>
 </section>
 
-<script>
-const canvas = document.getElementById('topoCanvas');
-const ctx = canvas.getContext('2d');
+<section class="section">
+    <h2>Core Technologies</h2>
+    <div class="grid">
+        <div class="card">C# / .NET</div>
+        <div class="card">ASP.NET Web API</div>
+        <div class="card">Cloud (Azure / AWS)</div>
+        <div class="card">SQL & Data Modeling</div>
+        <div class="card">AI & Machine Learning</div>
+        <div class="card">Git & CI/CD</div>
+    </div>
+</section>
 
-function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-}
-resize();
-window.addEventListener('resize', resize);
+<section class="section" id="projects">
+    <h2>Projects</h2>
 
-// Mountain layers
-const layers = [];
-const layerCount = 10;
+    <div class="project-card">
+        <h3>Scalable Web API</h3>
+        <p>Built RESTful API using ASP.NET Core with clean architecture and dependency injection.</p>
+    </div>
 
-for(let i=0;i<layerCount;i++){
-    layers.push({
-        offset: Math.random()*1000,
-        speed: 0.2 + Math.random()*0.3,
-        amplitude: 50 + i*10,
-        yShift: i*30
-    });
-}
+    <div class="project-card">
+        <h3>Cloud-Ready Backend</h3>
+        <p>Designed application prepared for Azure deployment with environment-based configuration.</p>
+    </div>
 
-function drawMountains(){
-    ctx.fillStyle = "#0e1511";
-    ctx.fillRect(0,0,canvas.width,canvas.height);
+    <div class="project-card">
+        <h3>AI Integration Project</h3>
+        <p>Integrated AI services into backend system for intelligent text processing.</p>
+    </div>
+</section>
 
-    ctx.strokeStyle = "#a4f9a4";
-    ctx.lineWidth = 2.5;
-    ctx.shadowColor = "#a4f9a4";
-    ctx.shadowBlur = 2;
+<section class="section">
+    <h2>Contact</h2>
+    <p>Email: yourmail@email.com</p>
+    <p>GitHub: github.com/yourusername</p>
+    <p>LinkedIn: linkedin.com/in/yourname</p>
+</section>
 
-    layers.forEach(layer=>{
-        ctx.beginPath();
-        for(let x=0;x<=canvas.width;x+=5){
-            let y = canvas.height/2 + layer.yShift + Math.sin(x/100 + (Date.now()/1000)*layer.speed + layer.offset)*layer.amplitude;
-            if(x===0) ctx.moveTo(x,y);
-            else ctx.lineTo(x,y);
-        }
-        ctx.stroke();
-    });
-}
-
-function animate(){
-    drawMountains();
-    requestAnimationFrame(animate);
-}
-animate();
-</script>
+<footer>
+    <p>© 2026 Milo • Built with HTML & CSS • Hosted on GitHub Pages</p>
+</footer>
 
 </body>
 </html>
