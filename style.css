@@ -14,7 +14,7 @@ body {
     overflow-x: hidden;
 }
 
-/* TOPOGRAPHIC MAP BACKGROUND - MORE VISIBLE */
+/* TOPOGRAPHIC MOUNTAIN BACKGROUND */
 .topo-background {
     position: fixed;
     width: 200%;
@@ -22,39 +22,28 @@ body {
     top: -50%;
     left: -50%;
     z-index: -1;
+    background-color: #0e1511; /* dark moss background */
 
-    background:
-        repeating-radial-gradient(
-            circle at 30% 40%,
-            rgba(34, 197, 94, 0.15) 0px,
-            rgba(34, 197, 94, 0.15) 2px,
-            transparent 2px,
-            transparent 30px
-        ),
-        repeating-radial-gradient(
-            circle at 70% 60%,
-            rgba(34, 197, 94, 0.12) 0px,
-            rgba(34, 197, 94, 0.12) 2px,
-            transparent 2px,
-            transparent 50px
-        ),
-        repeating-radial-gradient(
-            circle at 50% 20%,
-            rgba(34, 197, 94, 0.08) 0px,
-            rgba(34, 197, 94, 0.08) 2px,
-            transparent 2px,
-            transparent 70px
-        );
+    /* multiple "mountain contour layers" */
+    background-image:
+        linear-gradient(rgba(34,197,94,0.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(34,197,94,0.12) 1px, transparent 1px),
+        radial-gradient(circle at 30% 40%, rgba(34,197,94,0.08) 2px, transparent 4px),
+        radial-gradient(circle at 70% 60%, rgba(34,197,94,0.08) 2px, transparent 5px);
+    background-size: 50px 50px, 50px 50px, 150px 150px, 180px 180px;
 
-    animation: terrainMove 120s linear infinite;
+    animation: terrainMove 150s linear infinite;
 }
 
 @keyframes terrainMove {
-    from {
+    0% {
         transform: translate(0, 0) scale(1);
     }
-    to {
-        transform: translate(-120px, -80px) scale(1.02);
+    50% {
+        transform: translate(-60px, -40px) scale(1.01);
+    }
+    100% {
+        transform: translate(0, 0) scale(1);
     }
 }
 
