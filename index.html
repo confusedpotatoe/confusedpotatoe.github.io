@@ -4,156 +4,84 @@
 <meta charset="UTF-8">
 <title>Milo | AI & Cloud Engineer</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<style>
+  html, body { margin:0; padding:0; overflow:hidden; height:100%; font-family:Inter, sans-serif; }
+  canvas { display:block; position:fixed; top:0; left:0; z-index:-1; }
+  h1, h2, p, .btn { position:relative; z-index:1; color:#d1fae5; text-align:center; }
+  .hero { height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; }
+  .btn { margin-top:20px; padding:10px 25px; background:#4ade80; color:#0e1511; border-radius:25px; text-decoration:none; font-weight:600; }
+  section { padding:50px 20px; max-width:1000px; margin:auto; position:relative; z-index:1; }
+  .project-card { background:#16231c; margin:20px auto; padding:25px; border-radius:12px; border:1px solid #1f3a2f; max-width:600px; transition:0.3s; }
+  .project-card:hover { box-shadow:0 0 45px rgba(164,249,164,0.6); transform:translateY(-5px); }
+</style>
 </head>
 <body>
 
-<!-- Animated topographic background -->
 <canvas id="topoCanvas"></canvas>
 
 <header class="hero">
     <h1>Milo</h1>
-    <p class="tagline">Full-Stack Developer • AI • Cloud Architecture</p>
+    <p>Full-Stack Developer • AI • Cloud Architecture</p>
     <a href="#projects" class="btn">View Projects</a>
 </header>
 
-<section class="section">
-    <h2>About Me</h2>
-    <p>
-        Full-stack development student focused on building scalable systems,
-        RESTful APIs, and cloud-native applications. Passionate about AI-driven
-        solutions and modern infrastructure design.
-    </p>
-</section>
-
-<section class="section">
-    <h2>Core Technologies</h2>
-    <div class="grid">
-        <div class="card">C# / .NET</div>
-        <div class="card">ASP.NET Web API</div>
-        <div class="card">Cloud (Azure / AWS)</div>
-        <div class="card">SQL & Data Modeling</div>
-        <div class="card">AI & Machine Learning</div>
-        <div class="card">Git & CI/CD</div>
-    </div>
-</section>
-
-<section class="section" id="projects">
+<section>
     <h2>Projects</h2>
-
-    <div class="project-card">
-        <h3>Scalable Web API</h3>
-        <p>Built RESTful API using ASP.NET Core with clean architecture and dependency injection.</p>
-    </div>
-
-    <div class="project-card">
-        <h3>Cloud-Ready Backend</h3>
-        <p>Designed application prepared for Azure deployment with environment-based configuration.</p>
-    </div>
-
-    <div class="project-card">
-        <h3>AI Integration Project</h3>
-        <p>Integrated AI services into backend system for intelligent text processing.</p>
-    </div>
+    <div class="project-card"><h3>Scalable Web API</h3><p>RESTful API with clean architecture.</p></div>
+    <div class="project-card"><h3>Cloud Backend</h3><p>Azure-ready backend deployment.</p></div>
+    <div class="project-card"><h3>AI Integration</h3><p>Integrated AI services into backend.</p></div>
 </section>
-
-<section class="section">
-    <h2>Contact</h2>
-    <p>Email: yourmail@email.com</p>
-    <p>GitHub: github.com/yourusername</p>
-    <p>LinkedIn: linkedin.com/in/yourname</p>
-</section>
-
-<footer>
-    <p>© 2026 Milo • Built with HTML, CSS & JS • Hosted on GitHub Pages</p>
-</footer>
 
 <script>
-  const canvas = document.getElementById('topoCanvas');
+const canvas = document.getElementById('topoCanvas');
 const ctx = canvas.getContext('2d');
 
-function resizeCanvas() {
-    // Handle high-DPI screens
-    const dpr = window.devicePixelRatio || 1;
-    canvas.width = window.innerWidth * dpr;
-    canvas.height = window.innerHeight * dpr;
-    canvas.style.width = window.innerWidth + "px";
-    canvas.style.height = window.innerHeight + "px";
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-    ctx.scale(dpr, dpr);
+function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 }
-
-resizeCanvas();
+resize();
+window.addEventListener('resize', resize);
 
 // Mountain layers
 const layers = [];
-const layerCount = 6;
+const layerCount = 10;
 
-for (let i = 0; i < layerCount; i++) {
-    const points = [];
-    const step = 50;
-    for (let x = 0; x <= window.innerWidth + step; x += step) {
-        points.push({
-            x: x,
-            y: window.innerHeight/2 + Math.random() * 120 - 60 - i*25
-        });
-    }
-    layers.push({ points, speed: 0.3 + i*0.1, opacity: 0.5 - i*0.05 });
-}
-
-function drawLayer(layer) {
-    ctx.beginPath();
-    ctx.moveTo(0, window.innerHeight);
-    for (let i = 0; i < layer.points.length; i++) {
-        const p = layer.points[i];
-        ctx.lineTo(p.x, p.y);
-    }
-    ctx.lineTo(window.innerWidth, window.innerHeight);
-    ctx.closePath();
-    ctx.strokeStyle = `rgba(34,197,94,${layer.opacity})`;
-    ctx.lineWidth = 2.5; // make lines thicker
-    ctx.shadowColor = `rgba(34,197,94,0.3)`; // subtle glow
-    ctx.shadowBlur = 2;
-    ctx.stroke();
-}
-
-function animate() {
-    ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
-    layers.forEach(layer => {
-        // Move points left
-        layer.points.forEach(p => p.x -= layer.speed);
-        // Loop points
-        if(layer.points[0].x < -50) {
-            const first = layer.points.shift();
-            first.x = layer.points[layer.points.length-1].x + 50;
-            layer.points.push(first);
-        }
-        drawLayer(layer);
+for(let i=0;i<layerCount;i++){
+    layers.push({
+        offset: Math.random()*1000,
+        speed: 0.2 + Math.random()*0.3,
+        amplitude: 50 + i*10,
+        yShift: i*30
     });
+}
+
+function drawMountains(){
+    ctx.fillStyle = "#0e1511";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+
+    ctx.strokeStyle = "#a4f9a4";
+    ctx.lineWidth = 2.5;
+    ctx.shadowColor = "#a4f9a4";
+    ctx.shadowBlur = 2;
+
+    layers.forEach(layer=>{
+        ctx.beginPath();
+        for(let x=0;x<=canvas.width;x+=5){
+            let y = canvas.height/2 + layer.yShift + Math.sin(x/100 + (Date.now()/1000)*layer.speed + layer.offset)*layer.amplitude;
+            if(x===0) ctx.moveTo(x,y);
+            else ctx.lineTo(x,y);
+        }
+        ctx.stroke();
+    });
+}
+
+function animate(){
+    drawMountains();
     requestAnimationFrame(animate);
 }
-
 animate();
-
-window.addEventListener('resize', () => {
-    resizeCanvas();
-    layers.forEach(layer => {
-        // recalc points for new width/height
-        layer.points = [];
-        const step = 50;
-        for (let x = 0; x <= window.innerWidth + step; x += step) {
-            layer.points.push({
-                x: x,
-                y: window.innerHeight/2 + Math.random() * 120 - 60
-            });
-        }
-    });
-});
-
-
-animate();
-
 </script>
+
 </body>
 </html>
