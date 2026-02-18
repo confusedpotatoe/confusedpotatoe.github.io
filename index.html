@@ -69,6 +69,49 @@
     <p>© 2026 Milo • Built with HTML, CSS & JS • Hosted on GitHub Pages</p>
 </footer>
 
-<script src="topo.js"></script>
+<script>
+    const canvas = document.getElementById('topoCanvas');
+const ctx = canvas.getContext('2d');
+
+function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+const lines = [];
+for(let i=0;i<15;i++){
+    lines.push({
+        y: 50 + i*40,
+        amplitude: 30,
+        speed: 0.5 + Math.random()*0.3,
+        phase: Math.random()*100
+    });
+}
+
+function animate() {
+    ctx.fillStyle = "#0e1511";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+
+    ctx.strokeStyle = "#a4f9a4"; 
+    ctx.lineWidth = 3;
+
+    lines.forEach(line => {
+        ctx.beginPath();
+        for(let x=0;x<=canvas.width;x+=10){
+            let y = line.y + Math.sin((x/50) + (Date.now()/1000)*line.speed + line.phase)*line.amplitude;
+            if(x===0) ctx.moveTo(x,y);
+            else ctx.lineTo(x,y);
+        }
+        ctx.stroke();
+    });
+
+    requestAnimationFrame(animate);
+}
+
+animate();
+
+</script>
 </body>
 </html>
