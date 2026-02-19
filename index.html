@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
 </head>
 <body>
 
@@ -73,9 +74,25 @@ I’m currently aiming to grow within backend and full-stack development, taking
 <section class="section">
     <h2>Contact</h2>
     <p>Email: milo.arvaa@gmail.com</p>
-    <p>GitHub: https://github.com/confusedpotatoe</p>
-    <p>LinkedIn: www.linkedin.com/in/milo-eriksson</p>
+    <p>GitHub: <a href="https://github.com/yourusername" target="_blank">github.com/confusedpotatoe</a></p>
+    <p>LinkedIn: <a href="https://www.linkedin.com/in/yourname/" target="_blank">linkedin.com/in/milo-eriksson</a></p>
+
+    <!-- QR Code container -->
+    <div id="github-qr" class="qr-code"></div>
 </section>
+
+    <script>
+const githubUrl = "https://github.com/yourusername"; // your GitHub profile
+QRCode.toCanvas(document.getElementById('github-qr'), githubUrl, {
+    width: 150,         // QR code size
+    color: {
+        dark: '#a4f9a4',   // moss-green style lines
+        light: '#0e1511'   // background color matches your page
+    }
+}, function (error) {
+    if (error) console.error(error);
+});
+</script>
 
 <footer>
     <p>© 2026 Milo • Built with HTML & CSS • Hosted on GitHub Pages</p>
