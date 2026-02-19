@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Milo | AI & Cloud Engineer</title>
+    <title>Milo Eriksson | AI & Cloud Engineer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Google Font -->
@@ -78,21 +78,22 @@ I’m currently aiming to grow within backend and full-stack development, taking
     <p>LinkedIn: <a href="https://www.linkedin.com/in/yourname/" target="_blank">linkedin.com/in/milo-eriksson</a></p>
 
     <!-- QR Code container -->
-    <div id="github-qr" class="qr-code"></div>
+    <canvas id="github-qr" class="qr-code"></canvas>
 </section>
 
-    <script>
-const githubUrl = "https://github.com/confusedpotatoe"; 
-QRCode.toCanvas(document.getElementById('github-qr'), githubUrl, {
-    width: 150,         // QR code size
+   <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+<script>
+QRCode.toCanvas(document.getElementById('github-qr'), 'https://github.com/yourusername', {
+    width: 150,
     color: {
-        dark: '#a4f9a4',   // moss-green style lines
-        light: '#0e1511'   // background color matches your page
+        dark: '#a4f9a4',   // QR lines color
+        light: '#0e1511'   // background color matches page
     }
 }, function (error) {
     if (error) console.error(error);
 });
 </script>
+
 
 <footer>
     <p>© 2026 Milo • Built with HTML & CSS • Hosted on GitHub Pages</p>
