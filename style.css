@@ -22,6 +22,14 @@ body {
     text-align: center;
     padding: 20px;
 }
+.profile-pic {
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    border:3px solid #4ade80;
+    margin-bottom:20px;
+    object-fit:cover;
+}
 
 .hero h1 {
     font-size: 64px;
